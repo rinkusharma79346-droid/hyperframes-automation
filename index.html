@@ -1,143 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>HyperFrames Tech Documentary</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HyperFrames | Tech Documentary Layout</title>
   <style>
+    :root {
+      --obsidian-midnight: #080B10;
+      --tech-slate: #1E293B;
+      --chalk-white: #F1F5F9;
+      --gemini-cyan: #00E5FF;
+      --electric-amber: #FFB300;
+    }
+
+    * { box-sizing: border-box; }
+
     html, body {
+      width: 100%;
       height: 100%;
       margin: 0;
-      padding: 0;
-      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-      background: #080B10;
-      color: #F1F5F9;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--obsidian-midnight);
+      color: var(--chalk-white);
+      overflow: hidden;
     }
-    .container {
-      display: flex;
-      height: 100vh;
+
+    .stage {
       width: 100vw;
-      min-height: 100vh;
-      min-width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 6fr 3fr 1fr; /* 60-30-10 */
+      background: var(--obsidian-midnight);
     }
-    .main-canvas {
-      background: #080B10;
-      width: 60vw;
-      min-width: 60vw;
+
+    .canvas-base {
+      position: relative;
+      background: radial-gradient(circle at 20% 15%, #0e1622 0%, var(--obsidian-midnight) 45%);
+      border-right: 1px solid rgba(0, 229, 255, 0.18);
+      padding: 4vw;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 6px 0 18px rgba(0,0,0,0.85);
-      transition: background 0.7s cubic-bezier(.69,.06,.32,1.27);
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .architecture {
-      background: #1E293B;
-      width: 30vw;
-      min-width: 30vw;
+
+    .architecture-text {
+      background: linear-gradient(160deg, #223147 0%, var(--tech-slate) 70%);
+      border-right: 1px solid rgba(255, 179, 0, 0.2);
+      padding: 3vw 2vw;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 3vw 2vw;
-      border-right: 2px solid #00E5FF88;
-      box-shadow: 3px 0 16px 1px rgba(0,229,255,0.045);
-      transition: background 0.7s cubic-bezier(.69,.06,.32,1.27);
+      gap: 1.2rem;
     }
-    .highlights {
-      background: linear-gradient(120deg, #00E5FF 60%, #FFB300 100%);
-      width: 10vw;
-      min-width: 10vw;
+
+    .accent-strip {
+      background: linear-gradient(180deg, var(--gemini-cyan) 0%, var(--electric-amber) 100%);
+      color: var(--obsidian-midnight);
       display: flex;
       align-items: center;
-      color: #080B10;
-      font-size: 1.6vw;
-      font-weight: bold;
-      text-shadow: 0 2px 16px #fff3;
       justify-content: center;
-      letter-spacing: 0.05em;
-      box-shadow: 1px 0 16px 0 #FFB30055;
-      transition: background 0.7s cubic-bezier(.69,.06,.32,1.27);
-    }
-    h1 {
-      color: #00E5FF;
-      font-size: 3vw;
+      text-align: center;
+      padding: 1rem;
       font-weight: 700;
-      margin-bottom: 1.2vw;
-      letter-spacing: 0.06em;
-      text-shadow: 0 4px 24px #00E5FF88;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-    h2 {
-      color: #FFB300;
-      margin: 0.5vw 0;
-      font-size: 2vw;
-      letter-spacing: 0.02em;
-      text-shadow: 0 2px 8px #FFB30022;
+
+    .eyebrow {
+      color: var(--gemini-cyan);
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      margin: 0;
+      text-transform: uppercase;
     }
-    .text-block {
-      color: #F1F5F9;
-      font-size: 1.2vw;
-      line-height: 1.7;
-      margin-bottom: 1.5vw;
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 4.2rem);
+      line-height: 1.1;
+      max-width: 14ch;
     }
-    .vocal-accent {
-      color: #FFB300;
-      background: #1E293B;
-      border-left: 4px solid #00E5FF;
+
+    .subtitle {
+      margin: 0;
+      max-width: 58ch;
+      color: rgba(241, 245, 249, 0.84);
+      line-height: 1.6;
+      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+    }
+
+    .vocal-key {
+      border-left: 4px solid var(--gemini-cyan);
+      background: rgba(30, 41, 59, 0.45);
+      padding: 0.9rem 1rem;
+      color: var(--electric-amber);
       font-weight: 600;
-      padding: 0.7vw 1vw 0.7vw 1.2vw;
-      margin: 1vw 0 1vw 0;
-      border-radius: 0 10px 10px 0;
-      box-shadow: 2px 0 22px #00E5FF22;
     }
-    @media(max-width: 1023px) {
-      .container { flex-direction: column; }
-      .main-canvas, .architecture, .highlights {
-        width: 100vw;
-        min-width: 100vw;
-        min-height: unset;
-        height: 60vh;
+
+    .spec-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      line-height: 1.8;
+      color: var(--chalk-white);
+    }
+
+    @media (max-width: 1024px) {
+      .stage {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60vh 30vh 10vh;
       }
-      .architecture { height: 30vh; border-right: none; border-top: 2px solid #00E5FF88; }
-      .highlights { height: 10vh; background: linear-gradient(90deg, #00E5FF 60%, #FFB300 100%); box-shadow: none; }
+      .canvas-base, .architecture-text { border-right: none; }
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="main-canvas" id="main-canvas">
-      <h1>HyperFrames Documentary</h1>
-    </div>
-    <div class="architecture" id="architecture">
-      <div class="text-block">HyperFrames automates high-fidelity video rendering at cloud scale, leveraging distributed node graphs and state-of-the-art codecs.</div>
-      <div class="vocal-accent">Golden Ratio Design — 60% Foundation.<br>Streamlined by GSAP for cinematic narrative flow.</div>
-      <h2>Architecture</h2>
-      <div class="text-block">• Distributed node scheduling<br>• Real-time asset streaming<br>• Adaptive AI color grading<br>• Seamless FFMPEG/Chrome integration</div>
-    </div>
-    <div class="highlights" id="highlights">
-      <span>10%<br>Gemini Cyan<br>Electric Amber</span>
-    </div>
-  </div>
+  <main class="stage">
+    <section class="canvas-base" id="canvas-base">
+      <div>
+        <p class="eyebrow">HyperFrames Pipeline</p>
+        <h1>Rendering the anatomy of AI-native video systems.</h1>
+      </div>
+      <p class="subtitle">
+        A premium tech-documentary frame language balancing cinematic depth, data-led structure, and tactical highlights.
+      </p>
+    </section>
+
+    <aside class="architecture-text" id="architecture-text">
+      <h2>System Architecture</h2>
+      <p class="vocal-key">Voice Priority: Gemini Cyan and Electric Amber guide key spoken cues and narrative hooks.</p>
+      <ul class="spec-list">
+        <li>Node-22 orchestration for deterministic rendering</li>
+        <li>Chrome capture + FFmpeg encoding chain</li>
+        <li>Artifact retention for immediate review</li>
+      </ul>
+    </aside>
+
+    <aside class="accent-strip" id="accent-strip">
+      10% Vocal Accent
+    </aside>
+  </main>
+
   <script>
-    // Register GSAP timelines to window.__timelines
-    window.__timelines = {};
-    const { gsap } = window;
-    // Timeline for canvas
-    window.__timelines.main = gsap.timeline({paused: true})
-      .from("#main-canvas h1", {y: 60, opacity: 0, duration: 0.9, ease: "power3.out"})
-      .to("#main-canvas h1", {color: "#FFB300", duration: 1.2, delay: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut"}, "+=0.7");
-    // Timeline for architecture text
-    window.__timelines.architecture = gsap.timeline({paused: true})
-      .from("#architecture", {x: 80, opacity: 0, duration: 0.9, ease: "power2.out"})
-      .from("#architecture .vocal-accent", {backgroundColor: "#00E5FF", color: "#080B10", duration: 1.1, yoyo: true, repeat: 1, ease: "power2.inOut"}, "-=0.5");
-    // Timeline for highlights
-    window.__timelines.highlights = gsap.timeline({paused: true})
-      .from("#highlights", {scale: 0.65, opacity: 0, duration: 0.7, ease: "back.out(2)"})
-      .to("#highlights", {background: "linear-gradient(120deg, #FFB300 50%, #00E5FF 100%)", color: "#1E293B", duration: 1.5, yoyo: true, repeat: 1, ease: "power1.inOut"}, "+=0.4");
-    // On load, animate in all blocks smoothly
-    window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        Object.values(window.__timelines).forEach(tl => tl.play());
-      }, 150);
+    window.__timelines = window.__timelines || {};
+
+    window.__timelines.intro = gsap.timeline({ paused: true })
+      .from("#canvas-base .eyebrow", { y: 20, opacity: 0, duration: 0.55, ease: "power2.out" })
+      .from("#canvas-base h1", { y: 36, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.25")
+      .from("#canvas-base .subtitle", { opacity: 0, y: 16, duration: 0.65, ease: "power2.out" }, "-=0.3");
+
+    window.__timelines.architecture = gsap.timeline({ paused: true })
+      .from("#architecture-text", { x: 50, opacity: 0, duration: 0.75, ease: "power2.out" })
+      .from("#architecture-text .vocal-key", { backgroundColor: "#00E5FF", color: "#080B10", duration: 0.7, ease: "power1.inOut" }, "-=0.25")
+      .from("#architecture-text .spec-list li", { x: 18, opacity: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" }, "-=0.35");
+
+    window.__timelines.accent = gsap.timeline({ paused: true })
+      .from("#accent-strip", { scaleX: 0.75, opacity: 0, duration: 0.55, ease: "back.out(1.6)" })
+      .to("#accent-strip", { filter: "saturate(1.25)", duration: 0.45, yoyo: true, repeat: 1, ease: "power1.inOut" });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      gsap.delayedCall(0.15, () => {
+        window.__timelines.intro.play();
+        window.__timelines.architecture.play();
+        window.__timelines.accent.play();
+      });
     });
   </script>
 </body>
