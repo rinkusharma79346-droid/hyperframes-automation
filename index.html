@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>HyperFrames Tech Documentary</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: #080B10;
+      color: #F1F5F9;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      min-height: 100vh;
+      min-width: 100vw;
+    }
+    .main-canvas {
+      background: #080B10;
+      width: 60vw;
+      min-width: 60vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 6px 0 18px rgba(0,0,0,0.85);
+      transition: background 0.7s cubic-bezier(.69,.06,.32,1.27);
+    }
+    .architecture {
+      background: #1E293B;
+      width: 30vw;
+      min-width: 30vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3vw 2vw;
+      border-right: 2px solid #00E5FF88;
+      box-shadow: 3px 0 16px 1px rgba(0,229,255,0.045);
+      transition: background 0.7s cubic-bezier(.69,.06,.32,1.27);
+    }
+    .highlights {
+      background: linear-gradient(120deg, #00E5FF 60%, #FFB300 100%);
+      width: 10vw;
+      min-width: 10vw;
+      display: flex;
+      align-items: center;
+      color: #080B10;
+      font-size: 1.6vw;
+      font-weight: bold;
+      text-shadow: 0 2px 16px #fff3;
+      justify-content: center;
+      letter-spacing: 0.05em;
+      box-shadow: 1px 0 16px 0 #FFB30055;
+      transition: background 0.7s cubic-bezier(.69,.06,.32,1.27);
+    }
+    h1 {
+      color: #00E5FF;
+      font-size: 3vw;
+      font-weight: 700;
+      margin-bottom: 1.2vw;
+      letter-spacing: 0.06em;
+      text-shadow: 0 4px 24px #00E5FF88;
+    }
+    h2 {
+      color: #FFB300;
+      margin: 0.5vw 0;
+      font-size: 2vw;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 8px #FFB30022;
+    }
+    .text-block {
+      color: #F1F5F9;
+      font-size: 1.2vw;
+      line-height: 1.7;
+      margin-bottom: 1.5vw;
+    }
+    .vocal-accent {
+      color: #FFB300;
+      background: #1E293B;
+      border-left: 4px solid #00E5FF;
+      font-weight: 600;
+      padding: 0.7vw 1vw 0.7vw 1.2vw;
+      margin: 1vw 0 1vw 0;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 2px 0 22px #00E5FF22;
+    }
+    @media(max-width: 1023px) {
+      .container { flex-direction: column; }
+      .main-canvas, .architecture, .highlights {
+        width: 100vw;
+        min-width: 100vw;
+        min-height: unset;
+        height: 60vh;
+      }
+      .architecture { height: 30vh; border-right: none; border-top: 2px solid #00E5FF88; }
+      .highlights { height: 10vh; background: linear-gradient(90deg, #00E5FF 60%, #FFB300 100%); box-shadow: none; }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="main-canvas" id="main-canvas">
+      <h1>HyperFrames Documentary</h1>
+    </div>
+    <div class="architecture" id="architecture">
+      <div class="text-block">HyperFrames automates high-fidelity video rendering at cloud scale, leveraging distributed node graphs and state-of-the-art codecs.</div>
+      <div class="vocal-accent">Golden Ratio Design — 60% Foundation.<br>Streamlined by GSAP for cinematic narrative flow.</div>
+      <h2>Architecture</h2>
+      <div class="text-block">• Distributed node scheduling<br>• Real-time asset streaming<br>• Adaptive AI color grading<br>• Seamless FFMPEG/Chrome integration</div>
+    </div>
+    <div class="highlights" id="highlights">
+      <span>10%<br>Gemini Cyan<br>Electric Amber</span>
+    </div>
+  </div>
+  <script>
+    // Register GSAP timelines to window.__timelines
+    window.__timelines = {};
+    const { gsap } = window;
+    // Timeline for canvas
+    window.__timelines.main = gsap.timeline({paused: true})
+      .from("#main-canvas h1", {y: 60, opacity: 0, duration: 0.9, ease: "power3.out"})
+      .to("#main-canvas h1", {color: "#FFB300", duration: 1.2, delay: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut"}, "+=0.7");
+    // Timeline for architecture text
+    window.__timelines.architecture = gsap.timeline({paused: true})
+      .from("#architecture", {x: 80, opacity: 0, duration: 0.9, ease: "power2.out"})
+      .from("#architecture .vocal-accent", {backgroundColor: "#00E5FF", color: "#080B10", duration: 1.1, yoyo: true, repeat: 1, ease: "power2.inOut"}, "-=0.5");
+    // Timeline for highlights
+    window.__timelines.highlights = gsap.timeline({paused: true})
+      .from("#highlights", {scale: 0.65, opacity: 0, duration: 0.7, ease: "back.out(2)"})
+      .to("#highlights", {background: "linear-gradient(120deg, #FFB300 50%, #00E5FF 100%)", color: "#1E293B", duration: 1.5, yoyo: true, repeat: 1, ease: "power1.inOut"}, "+=0.4");
+    // On load, animate in all blocks smoothly
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        Object.values(window.__timelines).forEach(tl => tl.play());
+      }, 150);
+    });
+  </script>
+</body>
+</html>
